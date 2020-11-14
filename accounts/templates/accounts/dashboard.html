@@ -1,0 +1,60 @@
+{% extends 'accounts/main.html' %} {% load static %} {% block content %} {% include 'accounts/status.html' %}
+<link rel="stylesheet" href="{% static '/css/btn_grad.css' %}">
+
+<br>
+<div class="row">
+    <div class="col-md-5">
+        <h5>PATIENTS: {{total_patients}}</h5>
+        <hr>
+        <div class="card card-body">
+            <a href="http://localhost:8000/admin/auth/user/add/" class="btn-grad">Register a patient</a>
+            <br>
+            <table class="table table-sm">
+                <tr class="bg-dark text-white">
+                    <th></th>
+                    <th>Patient</th>
+                    <th>Phone</th>
+                </tr>
+                {% for patient in patients %}
+                <tr>
+                    <td> <a href="{% url 'customer' patient.id %}" class="btn btn-sm btn-info">View</a> </td>
+                    <!-- Another way to create dynamic URLS -->
+                    <td>{{patient.name}}</td>
+                    <td>{{patient.phone}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <div class="col-md-7">
+        <h5>RECENT ACTIVITIES</h5>
+        <hr>
+        <div class="card card-body">
+            <table class="table table-sm">
+                <tr class="bg-dark text-white">
+                    <th>Game</th>
+                    <th>Time Played</th>
+                    <th>Status</th>
+                    <th>Update</th>
+                    <th>Remove</th>
+                </tr>
+                {% for activity in activities %}
+                <tr>
+                    <td>{{activity.game}}</td>
+                    <td>{{activity.date_created}}</td>
+                    {% if activity.status == 'OPF' %}
+                    <td class="text-success">{{activity.status}}</td>
+                    {% elif activity.status == 'ELP' %}
+                    <td class="text-warning">{{activity.status}}</td>
+                    {% else %}
+                    <td class="text-danger">{{activity.status}}</td>
+                    {% endif %}
+                    <td> <a href="{% url 'update_order' activity.id %}" class="btn btn-sm btn-info">Update</a> </td>
+                    <td><a href="{% url 'delete_order' activity.id %}" class="btn btn-sm btn-danger">Delete</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,103 @@
+{% extends 'accounts/main.html' %} {% load crispy_forms_tags %} {% load static %} {% block content %}
+
+<link rel="stylesheet" href="{% static '/css/btn_hover.css' %}">
+
+<br>
+<div class="row">
+    <div class="col-md">
+        <div class="card card-body">
+            <h5>Patient: {{patient}}</h5>
+            <hr>
+            <a href="#" class="btn btn-outline-info btn-sm btn-block">Update Patient Info</a>
+            <a href="{% url 'create_order' patient.id %}" class="btn btn-outline-info btn-sm btn-block">Create Patient Entry</a>
+        </div>
+    </div>
+    <div class="col-md">
+        <div class="card card-body">
+            <h5>Contact Information</h5>
+            <table class="table">
+                <tr>
+                    <th>E-Mail</th>
+                    <th style="text-align: right;">Phone</th>
+                </tr>
+            </table>
+            <table class="table">
+                <tr>
+                    <td>{{patient.email}}</td>
+                    <td style="text-align: right;">{{patient.phone}}</td>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="col-md">
+        <div class="card card-body">
+            <h5>Total Activities</h5>
+            <hr>
+            <h1 style="text-align: center; padding: 10px;">{{total_activities}}</h1>
+        </div>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col">
+        <div class="card card-body">
+            <div class="accordion" id="accordionExample">
+                <div class="card">
+                    <div class="card-header" id="headingOne">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link btn-block text-left text-decoration-none" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                <center> Search in Entries</center>
+              </button>
+                        </h2>
+                    </div>
+
+                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <form method="get">
+                                {{my_filter.form | crispy}}
+                                <button type="submit" name="button" class="btn-hover color-2">Search</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-md">
+        <div class="card card body">
+            <table class="table table-sm">
+                <tr class="bg-dark text-white">
+                    <th>Game</th>
+                    <th>Remarks</th>
+                    <th>Category</th>
+                    <th>Date and Time Played</th>
+                    <th>Status</th>
+                    <th>Update</th>
+                    <th>Remove</th>
+                </tr>
+                {% for activity in activities %}
+                <tr>
+                    <td>{{activity.game}}</td>
+                    <td>{{activity.note}}</td>
+                    <td>{{activity.game.category}}</td>
+                    <td>{{activity.date_created}}</td>
+                    {% if activity.status == 'OPF' %}
+                    <td class="text-success">{{activity.status}}</td>
+                    {% elif activity.status == 'ELP' %}
+                    <td class="text-warning">{{activity.status}}</td>
+                    {% else %}
+                    <td class="text-danger">{{activity.status}}</td>
+                    {% endif %}
+                    <td> <a href="{% url 'update_order' activity.id %}" class="btn btn-sm btn-info">Update</a> </td>
+                    <td><a href="{% url 'delete_order' activity.id %}" class="btn btn-sm btn-danger">Delete</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

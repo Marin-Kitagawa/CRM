@@ -1,0 +1,21 @@
+{% extends 'accounts/main.html' %} {% load static %} {% load crispy_forms_tags %} {% block content %}
+<link rel="stylesheet" href="{% static '/css/btn_grad.css' %}">
+
+<br>
+<div class="row justify-content-center">
+    <div class="col-6">
+        <div class="card card-body">
+            <form action="" method="POST" novalidate>
+                {% csrf_token %} {{ form.management_form}}
+                <!-- Saves each of the data in the below loop individually -->
+                {% for field in form %} {{field}}
+                <hr> {% endfor %}
+                <!-- The form word above should be the same name as in the views context key name obviously -->
+                <input type="submit" name="Submit" class="btn-grad" style="border: none;">
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

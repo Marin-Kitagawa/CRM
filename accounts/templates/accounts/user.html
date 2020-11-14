@@ -1,0 +1,36 @@
+{% extends 'accounts/main.html' %} {% load static %} {% block content %} {% include 'accounts/status.html' %}
+
+<link rel="stylesheet" href="{% static '/css/font.css' %}">
+
+<div class="row">
+    <div class="col-md">
+        <div class="card card body">
+            <table class="table table-sm">
+                <tr class="bg-dark text-white">
+                    <th>Game</th>
+                    <th>Remarks</th>
+                    <th>Category</th>
+                    <th>Date and Time Played</th>
+                    <th>Status</th>
+                </tr>
+                {% for activity in activities %}
+                <tr>
+                    <td>{{activity.game}}</td>
+                    <td>{{activity.note}}</td>
+                    <td>{{activity.game.category}}</td>
+                    <td>{{activity.date_created}}</td>
+                    {% if activity.status == 'OPF' %}
+                    <td class="text-success">{{activity.status}}</td>
+                    {% elif activity.status == 'ELP' %}
+                    <td class="text-warning">{{activity.status}}</td>
+                    {% else %}
+                    <td class="text-danger">{{activity.status}}</td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

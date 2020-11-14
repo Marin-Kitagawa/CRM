@@ -81,14 +81,21 @@ WSGI_APPLICATION = 'CRM.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'DB_DEMO',
+#         'USER': 'postgres',
+#         'PASSWORD':'S*/rams365896/*Y',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'DB_DEMO',
-        'USER': 'postgres',
-        'PASSWORD':'S*/rams365896/*Y',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 import dj_database_url

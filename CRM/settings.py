@@ -142,8 +142,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'gitbash.hub@gmail.com'
-EMAIL_HOST_PASSWORD = "*)S;W6~T\"IeV`u\\%E|)5ohSzw!{JpWkxffgWY07_ouV\\Vuj]R6]gsgf}v^+=q/xy:b_Y4&iKY0h,<L)Ej-UI%OdS*e~W_T02xH`="
+EMAIL_HOST_USER = <EMAIL>
+EMAIL_HOST_PASSWORD = <PASSWORD>
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
